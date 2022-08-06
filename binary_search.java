@@ -3,7 +3,7 @@ package ds.ex1;
 import java.util.Scanner;
 
 class bi_s{
-    double[] vl=new double[100];
+    double[] vl=new double[10000];
     int sz=0;
     public void display(){
         if (this.sz<1) {
@@ -32,6 +32,15 @@ class bi_s{
         }
         System.out.println("Element is not found in this array.");
     }
+    public void se(double ele){
+        for (int i=0;i<this.sz;i++){
+            if (this.vl[i]==ele){
+                System.out.println("founded.");
+                return;
+            }
+        }
+        System.out.println("not founded");
+    }
 }
 
 public class binary_search {
@@ -43,12 +52,17 @@ public class binary_search {
         a1.sz=s.nextInt()-1;
         System.out.println("\t:: Enter elements ::");
         for (int i=0;i<=a1.sz;i++){
-            System.out.print("Element number "+(i+1)+" = ");
-            a1.vl[i]=s.nextDouble();
+//            System.out.print("Element number "+(i+1)+" = ");
+//            a1.vl[i]=s.nextDouble();
+            a1.vl[i]=(i+1);
         }
         a1.display();
         System.out.println(":: Enter which element you want to search in this array ::");
         double ele=s.nextDouble();
+        long start = System.nanoTime();
         a1.search(ele);
+//        a1.se(ele);
+        long end = System.nanoTime();
+        System.out.println("Time taken : " + (end - start) + " nanos.");
     }
 }
