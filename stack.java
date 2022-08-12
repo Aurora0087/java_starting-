@@ -26,9 +26,16 @@ class stacks{
             return;
         }
         System.out.println("\n:: Elements given below ::");
-        for (int i=0;i<=top;i++){
+        for (int i=top;i>=0;i--){
             System.out.print(this.data[i]+" | ");
         }
+    }
+    public void peek(int index){
+        if (index<1||index>(top+1)){
+            System.out.println("\nPlease enter valid position.");
+            return;
+        }
+        System.out.println("\nValue of this position's element = "+data[top-index+1]);
     }
     public boolean isEmpty(){
         return this.top < 0;
@@ -58,7 +65,7 @@ public class stack {
             a.push(data);
         }
         a.display();
-        System.out.print("\n:: Enter which element you want ti insert in stack ::\n");
+        System.out.print("\n:: Enter which element you want to insert in stack ::\n");
         data=s.nextDouble();
         a.push(data);
         a.display();
@@ -71,5 +78,8 @@ public class stack {
         if (!a.isFull()){
             System.out.println("\nStack is not full.");
         }
+        System.out.println("\nEnter position where you want to peek.");
+        int index=s.nextInt();
+        a.peek(index);
     }
 }
