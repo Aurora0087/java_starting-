@@ -14,14 +14,14 @@ class stacks{
         this.data[top]=data;
     }
     public void pop(){
-        if (this.top< -1) {
+        if (this.top<0) {
             System.out.println("\nStack is empty.");
             return;
         }
         this.top--;
     }
     public void display(){
-        if (this.top< -1) {
+        if (this.top<0) {
             System.out.println("\nStack is empty.");
             return;
         }
@@ -29,6 +29,12 @@ class stacks{
         for (int i=0;i<=top;i++){
             System.out.print(this.data[i]+" | ");
         }
+    }
+    public boolean isEmpty(){
+        return this.top < 0;
+    }
+    public boolean isFull(){
+        return this.top >= 99;
     }
 }
 
@@ -40,6 +46,12 @@ public class stack {
         System.out.print("\nEnter how many element you want to insert in Stack = ");
         int size=s.nextInt();
         stacks a=new stacks();
+        if(!a.isEmpty()){
+            System.out.println("\nStack is not empty.");
+        }
+        else {
+            System.out.println("\nStack is empty.");
+        }
         for (int i=0;i<size;i++){
             System.out.print("\nElement number "+(i+1)+" = ");
             data=s.nextDouble();
@@ -53,5 +65,11 @@ public class stack {
         System.out.print("\n:: Deleting last element from stack ::\n");
         a.pop();
         a.display();
+        if(!a.isEmpty()){
+            System.out.println("\nStack is not empty.");
+        }
+        if (!a.isFull()){
+            System.out.println("\nStack is not full.");
+        }
     }
 }
