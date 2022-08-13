@@ -35,6 +35,13 @@ public class stack_using_link_list {
         tail.next=null;
         return 1;
     }
+    public static double peek(int index){
+        node current=tail;
+        for (int i=0;i<index-1;i++){
+            current=current.pre;
+        }
+        return current.data;
+    }
     public static void display(){
         if (head==null){
             System.out.println("\nStack is empty.");
@@ -51,6 +58,7 @@ public class stack_using_link_list {
         System.out.println("\n:: Implement Stack Using Linked List ::");
         Scanner s=new Scanner(System.in);
         double data;
+        int index;
         System.out.print("Enter how many element you want to insert in stack = ");
         int size=s.nextInt();
         for (int i=0;i<size;i++){
@@ -61,7 +69,7 @@ public class stack_using_link_list {
         display();
         int instr;
         do {
-            System.out.println("\n\t:: 1 of pushing element ::\n\t:: 2 of deleting last element ::\n\t:: 3 for displaying stack elements ::\n\t:: 4 for stack size ::\n\t:: 0 for exit ::");
+            System.out.println("\n\t:: 1 for pushing element ::\t\t:: 2 for deleting last element ::\n\t:: 3 for displaying stack elements ::\t:: 4 for stack size ::\n\t:: 5 for peeking into stack ::\t:: 0 for exit ::");
             instr=s.nextInt();
             if (instr==1){
                 System.out.print("\nEnter element's value =");
@@ -77,12 +85,17 @@ public class stack_using_link_list {
             }
             else if (instr==4){
                 System.out.println("Size of stack = "+size);
-            }
-            else if (instr==0){
+            } else if (instr==5) {
+                System.out.print("\nEnter which element want to peek = ");
+                index=s.nextInt();
+                if (index<0||index>size) System.out.println("\nPlease enter between 0 - "+size+".");
+                else System.out.println("element is = "+(peek(index)));
+            } else if (instr==0){
                 System.out.println("\n:: Exiting the program ::");
             }
             else System.out.println("\nEnter current input.");
 
         }while (instr!=0);
+
     }
 }
