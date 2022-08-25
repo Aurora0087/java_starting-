@@ -3,11 +3,11 @@ package ds.ex1.tree_str;
 import java.util.*;
 
 class trees{
-    public static class node{
+    private static class node{
         node left;
-        int data;
+        double data;
         node right;
-        public node(int data){
+        public node(double data){
             left=null;
             this.data=data;
             right=null;
@@ -18,11 +18,10 @@ class trees{
         root = null;
     }
 
-    public void put(int data){
+    public void put(double data){
         node nt=new node(data);
         if(root==null){
             root=nt;
-            return;
         }
         else {
             Queue<node> qu= new LinkedList<node>();
@@ -47,7 +46,7 @@ class trees{
             }
         }
     }
-    public void inorderTra(node nd){
+     private void inorderTra(node nd){
         if (root==null){
             System.out.println("Tree is empty...");
             return;
@@ -56,21 +55,47 @@ class trees{
         System.out.print(nd.data+" | ");
         if (nd.right!=null) inorderTra(nd.right);
     }
+    public void print_tree(trees tr){
+        tr.inorderTra(tr.root);
+    }
+    public boolean isBTS(node nd){
+        if (nd == null)return true;
+        if (nd.left!=null && nd.left.data>=nd.data)return false;
+        if (nd.right!=null && nd.right.data<=nd.data)return false;
+        return isBTS(nd.left) && isBTS(nd.right);
+    }
+    public node b_search(node nd,double element){
+        while (nd!=null) {
+            if (element == nd.data) return nd;
+            else if (element < nd.data) return b_search(nd.left, element);
+            else return b_search(nd.right, element);
+        }
+        return null;
+    }
 }
 
 public class b_tree {
     public static void main(String[] args) {
         trees tr=new trees();
-        tr.put(1);
-        tr.put(2);
-        tr.put(3);
-        tr.put(4);
-        tr.put(5);
-        tr.put(6);
-        tr.put(7);
-        tr.put(8);
+        Scanner s=new Scanner(System.in);
+        double data;
+        System.out.println("\n:: Enter how many element you want to insert in tree ::");
+        int size=s.nextInt();
+        for (int i=0;i<size;i++){
+            System.out.print("Enter element number "+(i+1)+" = ");
+            data=s.nextDouble();
+            tr.put(data);
+        }
         System.out.println("\n:: Trees elements given below ::\n");
         System.out.println("\n:: Using InOrder ::\n");
-        tr.inorderTra(tr.root);
+        tr.print_tree(tr);
+        if(tr.isBTS(tr.root)) {
+            System.out.println("\nYes, its a binary tree..");
+            System.out.print("\n:: Enter which element you want to search :: ");
+            double element=s.nextDouble();
+            if(tr.b_search(tr.root,element)!=null) System.out.println(element+" is present in tree...");
+            else System.out.println("Given element "+element+" is not present in tree...");
+        }
+        else System.out.println("\nNop, its a binary tree..");
     }
 }
