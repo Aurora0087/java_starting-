@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define M 10
+#define M 100
 
 typedef struct queue
 {
@@ -48,11 +48,11 @@ void display(que q)
 
 int main()
 {
-    int ch=0, n;
+    int ch = 0, n;
     que q;
     q.data = (int *)malloc(M * sizeof(int));
     q.r = q.f = -1;
-    system ("cls");
+    system("cls");
     do
     {
         printf("\n1 : Insertion...\n2 : Deletion...\n3 : Displaying all element...\n0 : exit...");
@@ -62,7 +62,7 @@ int main()
         {
         case 1:
         {
-            system ("cls");
+            system("cls");
             printf("\nEnter element's value = ");
             scanf("%d", &n);
             insertion(&q, n);
@@ -70,25 +70,25 @@ int main()
         }
         case 2:
         {
-            system ("cls");
+            system("cls");
             deletion(&q);
             break;
         }
         case 3:
         {
-            system ("cls");
+            system("cls");
             display(q);
             break;
         }
         case 0:
         {
-            system ("cls");
+            system("cls");
             printf("\nExiting...");
             break;
         }
         default:
         {
-            system ("cls");
+            system("cls");
             printf("\n**Plese enter correct input...");
             break;
         }
