@@ -9,8 +9,10 @@ typedef struct queue
     int f;
 } que;
 
-void creat_data(que *q){
+void creat_data(que *q)
+{
     q->data = (int *)malloc(M * sizeof(int));
+    q->r = q->f = -1;
 }
 
 void insertion(que *q, int n)
@@ -55,8 +57,8 @@ int main()
     int ch = 0, n;
     que q;
     creat_data(&q);
-    q.r = q.f = -1;
     system("cls");
+    printf("\n:: Queue using array ::\n");
     do
     {
         printf("\n1 : Insertion...\n2 : Deletion...\n3 : Displaying all element...\n0 : exit...");
