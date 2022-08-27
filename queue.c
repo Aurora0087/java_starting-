@@ -9,6 +9,10 @@ typedef struct queue
     int f;
 } que;
 
+void creat_data(que *q){
+    q->data = (int *)malloc(M * sizeof(int));
+}
+
 void insertion(que *q, int n)
 {
     if (q->r == M - 1)
@@ -50,7 +54,7 @@ int main()
 {
     int ch = 0, n;
     que q;
-    q.data = (int *)malloc(M * sizeof(int));
+    creat_data(&q);
     q.r = q.f = -1;
     system("cls");
     do
