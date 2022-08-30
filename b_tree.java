@@ -72,13 +72,56 @@ class trees{
         }
         return null;
     }
+    public double minValue(node r){
+        double min=r.data;
+        while (r.left!=null){
+            min=r.data;
+            r=r.left;
+        }
+        return min;
+    }
+    public void Insertion(node nd,double element){
+        node pre=null;
+        while (nd!=null){
+            pre=nd;
+            if (element==nd.data){
+                System.out.println("Element "+element+" already have in BTS...");
+                return;
+            }
+            else if (element < nd.data)nd=nd.left;
+            else nd=nd.right;
+        }
+        node new_node=new node(element);
+        assert pre != null;
+        if (element<pre.data)pre.left=new_node;
+        else pre.right=new_node;
+    }
+    void deleteKey(double value) { root = deleteTree(root, value); }
+    public node deleteTree(node r,double v){
+        if (r==null)return null;
+        if (v<r.data) r.left=deleteTree(r.left,v);
+        else if (v>r.data) {
+            r.right=deleteTree(r.right,v);
+        }
+        else {
+            if (r.left==null)return r.right;
+            else if (r.right==null) {
+                return r.left;
+            }
+            else{
+                r.data=minValue(r.right);
+                r.right=deleteTree(r.right,r.data);
+            }
+        }
+        return r;
+    }
 }
 
 public class b_tree {
     public static void main(String[] args) {
         trees tr=new trees();
         Scanner s=new Scanner(System.in);
-        double data;
+        double data,element;
         System.out.println("\n:: Enter how many element you want to insert in tree ::");
         int size=s.nextInt();
         for (int i=0;i<size;i++){
@@ -92,10 +135,20 @@ public class b_tree {
         if(tr.isBTS(tr.root)) {
             System.out.println("\nYes, its a binary tree..");
             System.out.print("\n:: Enter which element you want to search :: ");
-            double element=s.nextDouble();
+            element=s.nextDouble();
             if(tr.b_search(tr.root,element)!=null) System.out.println(element+" is present in tree...");
             else System.out.println("Given element "+element+" is not present in tree...");
         }
         else System.out.println("\nNop, its a binary tree..");
+        System.out.print("\nEnter which element you want to insert in tree = ");
+        element=s.nextDouble();
+        tr.Insertion(tr.root,element);
+        System.out.println("\n:: Trees elements given below ::\n");
+        tr.print_tree(tr);
+        System.out.print("\nEnter which element you want to delete = ");
+        element=s.nextDouble();
+        tr.deleteKey(element);
+        tr.print_tree(tr);
+        if(tr.isBTS(tr.root)) System.out.println("\nIt's a bts tree...");
     }
 }
